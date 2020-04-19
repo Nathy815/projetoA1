@@ -25,6 +25,7 @@ public class SmartTVJFrame extends javax.swing.JFrame {
      * Creates new form SmartTVJFrame
      */
     public SmartTVJFrame() {
+        
         try {
             // Exportando o objeto para o stub
             ISmartTV stub = (ISmartTV) UnicastRemoteObject.exportObject(stvController, 0);

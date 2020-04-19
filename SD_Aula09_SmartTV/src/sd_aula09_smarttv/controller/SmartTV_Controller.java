@@ -17,24 +17,25 @@ public class SmartTV_Controller implements ISmartTV {
 
     public SmartTV_Controller(SmartTV stv) {
         this.stv = stv;
-        
     }
-        
 
     public void turnOffOn() {
         if (stv.isPowerButton()) {
             stv.setPowerButton(false);
+            System.out.println("TV - Turnoff");
         } else {
             stv.setPowerButton(true);
+            System.out.println("TV - TurnOn");
         }
     }
 
     public void changeChannel(int channel) {
         stv.setChannel(channel);
+        System.out.println("TV - Channel");
     }
     
     public void changeVolume(int volume){
         stv.setVolume(volume);
-        
+        System.out.println("TV - Volume");
     }
 }

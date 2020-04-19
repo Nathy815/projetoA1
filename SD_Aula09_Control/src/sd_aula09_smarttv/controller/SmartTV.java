@@ -20,13 +20,7 @@ public class SmartTV {
     
     public SmartTV()
     {
-        try {
-            // Pegando o registro 
-            Registry registry = LocateRegistry.getRegistry("localhost", 18001);
-
-            // Procurando por um registro que utilize a Interface ISmartDoor
-            ISmartTV stub = (ISmartTV) registry.lookup("SmartTV");
-
+        /*try {
             _scanner = new Scanner(System.in);
             
             System.out.println("O que você deseja fazer (1 a 3)?\n1. Ligar/Desligar\n2. Mudar o canal\n3. Alterar o volume");
@@ -35,25 +29,67 @@ public class SmartTV {
             switch(option)
             {
                 case 1:
-                    stub.turnOffOn();
+                    turnOffOn();
                     break;
                 case 2:
                     _scanner = new Scanner(System.in);
                     System.out.println("Digite o canal que deseja:");
                     int canal = _scanner.nextInt();
-                    stub.changeChannel(canal);
+                    changeChannel(canal);
                     break;
                 case 3:
                     _scanner = new Scanner(System.in);
                     System.out.println("Digite o volume que deseja:");
                     int vol = _scanner.nextInt();
-                    stub.changeVolume(vol);
+                    changeVolume(vol);
                     break;
                 default:
                     System.out.println("Não conseguimos processar sua opção.");
                     break;
             }
         } catch (Exception e) {
+            System.err.println("Exceção do Cliente: " + e.toString());
+            e.printStackTrace();
+        } */
+    }
+    
+    public void turnOffOn()
+    {
+        try
+        {
+            Registry registry = LocateRegistry.getRegistry("localhost", 18001);
+            ISmartTV stub = (ISmartTV) registry.lookup("SmartTV");
+            stub.turnOffOn();
+        }
+        catch (Exception e) {
+            System.err.println("Exceção do Cliente: " + e.toString());
+            e.printStackTrace();
+        } 
+    }
+    
+    public void changeChannel(int channel)    
+    {
+        try
+        {
+            Registry registry = LocateRegistry.getRegistry("localhost", 18001);
+            ISmartTV stub = (ISmartTV) registry.lookup("SmartTV");
+            stub.changeChannel(channel);
+        }
+        catch (Exception e) {
+            System.err.println("Exceção do Cliente: " + e.toString());
+            e.printStackTrace();
+        } 
+    }
+    
+    public void changeVolume(int volume)
+    {
+        try
+        {
+            Registry registry = LocateRegistry.getRegistry("localhost", 18001);
+            ISmartTV stub = (ISmartTV) registry.lookup("SmartTV");
+            stub.changeVolume(volume);
+        }
+        catch (Exception e) {
             System.err.println("Exceção do Cliente: " + e.toString());
             e.printStackTrace();
         } 

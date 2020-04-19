@@ -23,6 +23,7 @@ public class SmartDoor_Controller implements ISmartDoor {
     }
         
     public boolean checkPassword(String pwd) {
+        System.out.println("SmartDoor - checkPassword");
         if (pwd.equals(sd.getPassword())){
             sd.setOpened(true);
             return true;
@@ -31,6 +32,7 @@ public class SmartDoor_Controller implements ISmartDoor {
     }
     
     public void closeDoor(){
+        System.out.println("SmartDoor - closeDoor");
         this.sd.setOpened(false);
     }
     

@@ -19,7 +19,7 @@ public class Light {
     
     public Light()
     {
-        try {
+        /*try {
             // Pegando o registro 
             Registry registry = LocateRegistry.getRegistry("localhost", 18002);
 
@@ -49,6 +49,33 @@ public class Light {
         } catch (Exception e) {
             System.err.println("Exceção do Cliente: " + e.toString());
             e.printStackTrace();
-        }   
+        }   */
+    }
+    
+    public void SmartLight_TurnOnOff()
+    {
+        try {
+            Registry registry = LocateRegistry.getRegistry("localhost", 18002);
+            ILight stub = (ILight) registry.lookup("Light");
+            stub.turnOffOn();
+        } 
+        catch (Exception e) {
+            System.err.println("Exceção do Cliente: " + e.toString());
+            e.printStackTrace();
+        }
+    }
+    
+    public void SmartLight_Intensity(int intensity)
+    {
+        try
+        {
+            Registry registry = LocateRegistry.getRegistry("localhost", 18002);
+            ILight stub = (ILight) registry.lookup("Light");
+            stub.changeIntensity(intensity);
+        } 
+        catch (Exception e) {
+            System.err.println("Exceção do Cliente: " + e.toString());
+            e.printStackTrace();
+        }
     }
 }

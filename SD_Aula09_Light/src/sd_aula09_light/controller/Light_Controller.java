@@ -24,13 +24,16 @@ public class Light_Controller implements ILight {
     public void turnOffOn() {
         if (lig.isPowerButton()) {
             lig.setPowerButton(false);
+            System.out.println("Light - turnOff");
         } else {
             lig.setPowerButton(true);
+            System.out.println("Light - turnOn");
         }
     }
 
     public void changeIntensity(int intensity) {
         lig.setIntensity(intensity);
+        System.out.println("Light - intensidade");
     }
     
 }

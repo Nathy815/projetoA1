@@ -20,10 +20,10 @@ public class SmartDoor {
     
     public SmartDoor()
     {
-        try {
+        /*try {
             // Pegando o registro 
             Registry registry = LocateRegistry.getRegistry("localhost", 18000);
-
+            
             // Procurando por um registro que utilize a Interface ISmartDoor
             ISmartDoor stub = (ISmartDoor) registry.lookup("SmartDoor");
 
@@ -57,6 +57,39 @@ public class SmartDoor {
         } catch (Exception e) {
             System.err.println("Exceção do Cliente: " + e.toString());
             e.printStackTrace();
-        }   
+        }   */
+    }
+
+    public boolean checkPassword(String pwd)
+    {
+        try
+        {
+            Registry registry = LocateRegistry.getRegistry("localhost", 18000);
+            ISmartDoor stub = (ISmartDoor) registry.lookup("SmartDoor");
+            
+            return stub.checkPassword(pwd);
+        }
+        catch(Exception e)
+        {
+            System.err.println("Exceção do Cliente: " + e.toString());
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public void closeDoor()
+    {
+        try
+        {
+            Registry registry = LocateRegistry.getRegistry("localhost", 18000);
+            ISmartDoor stub = (ISmartDoor) registry.lookup("SmartDoor");
+            
+            stub.closeDoor();
+        }
+        catch(Exception e)
+        {
+            System.err.println("Exceção do Cliente: " + e.toString());
+            e.printStackTrace();
+        }
     }
 }
