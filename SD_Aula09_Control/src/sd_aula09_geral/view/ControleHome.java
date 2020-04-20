@@ -401,7 +401,7 @@ public class ControleHome extends javax.swing.JFrame {
         });
 
         bntBack.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        bntBack.setText("<");
+        bntBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sd_aula09_assets/Imagem/eraser.png"))); // NOI18N
         bntBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bntBackActionPerformed(evt);
@@ -429,7 +429,7 @@ public class ControleHome extends javax.swing.JFrame {
 
         btnOff.setBackground(new java.awt.Color(0, 204, 255));
         btnOff.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
-        btnOff.setText("Off/Fechar");
+        btnOff.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sd_aula09_assets/Imagem/doorClose.png"))); // NOI18N
         btnOff.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOffActionPerformed(evt);
@@ -438,7 +438,7 @@ public class ControleHome extends javax.swing.JFrame {
 
         intensidade.setBackground(new java.awt.Color(0, 204, 255));
         intensidade.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
-        intensidade.setText("Intensidade");
+        intensidade.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sd_aula09_assets/Imagem/light.png"))); // NOI18N
         intensidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 intensidadeActionPerformed(evt);
@@ -447,7 +447,7 @@ public class ControleHome extends javax.swing.JFrame {
 
         ventilador.setBackground(new java.awt.Color(0, 204, 255));
         ventilador.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
-        ventilador.setText("Ventilador");
+        ventilador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sd_aula09_assets/Imagem/fan.png"))); // NOI18N
         ventilador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ventiladorActionPerformed(evt);
@@ -456,7 +456,7 @@ public class ControleHome extends javax.swing.JFrame {
 
         canal.setBackground(new java.awt.Color(0, 204, 255));
         canal.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
-        canal.setText("Canal");
+        canal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sd_aula09_assets/Imagem/television.png"))); // NOI18N
         canal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 canalActionPerformed(evt);
@@ -556,7 +556,7 @@ public class ControleHome extends javax.swing.JFrame {
                     .addComponent(btnSend, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnOff, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
+                    .addComponent(btnOff, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(canal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(ventilador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
