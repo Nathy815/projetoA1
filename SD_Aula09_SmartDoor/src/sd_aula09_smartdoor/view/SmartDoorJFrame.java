@@ -21,6 +21,7 @@ public class SmartDoorJFrame extends javax.swing.JFrame {
 
     private SmartDoor sd = new SmartDoor();
     private final SmartDoor_Controller sdController = new SmartDoor_Controller(sd);
+    private static SmartDoorJFrame view;
 
     /**
      * Creates new form SmartTVJFrame
@@ -28,6 +29,8 @@ public class SmartDoorJFrame extends javax.swing.JFrame {
     public SmartDoorJFrame() {
         
         try {
+            view = this;
+            
             // Exportando o objeto para o stub
             ISmartDoor stub = (ISmartDoor) UnicastRemoteObject.exportObject(sdController, 0);
             // Binding o objeto remoto (stub) no registro
@@ -35,12 +38,31 @@ public class SmartDoorJFrame extends javax.swing.JFrame {
             registry.rebind("SmartDoor", stub);
 
             System.err.println("Servidor Pronto");
+            
+            initComponents();
+            FecharPortajButton1.setVisible(false);
+        
         } catch (Exception e) {
             System.err.println("Exceção do Servidor: " + e.toString());
             e.printStackTrace();
         }
         
-        initComponents();
+    }
+    
+    public static SmartDoorJFrame getInstance() {
+        return view;
+    }
+    
+    public void OpenVisibility() {
+        ValorPortajLabel1.setText("Aberta");
+
+        FecharPortajButton1.setVisible(true);
+        
+        SenhajTextField.setText("");
+    }
+    
+    public void CloseVisibility() {
+        ValorPortajLabel1.setText("Fechada");
         FecharPortajButton1.setVisible(false);
     }
 
@@ -171,33 +193,22 @@ public class SmartDoorJFrame extends javax.swing.JFrame {
 
     private void SenhajButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SenhajButtonActionPerformed
         String pwd = this.SenhajTextField.getText();
+        
         if (this.sdController.checkPassword(pwd)) {
-            ValorPortajLabel1.setText("Aberta");
-
-            FecharPortajButton1.setVisible(true);
+            OpenVisibility();
         } else{
             JOptionPane.showMessageDialog(rootPane, "Senha Inválida!");
         }
         
         SenhajTextField.setText("");
-
     }//GEN-LAST:event_SenhajButtonActionPerformed
 
     private void FecharPortajButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FecharPortajButton1ActionPerformed
         this.sdController.closeDoor();
-        ValorPortajLabel1.setText("Fechada");
-        FecharPortajButton1.setVisible(false);
+        
+        CloseVisibility();
     }//GEN-LAST:event_FecharPortajButton1ActionPerformed
 
-    public void Atualizar()
-    {
-        boolean opened = sd.isOpened();
-        FecharPortajButton1.setVisible(opened);
-        if (opened)
-            ValorPortajLabel1.setText("Aberta");
-        else
-            ValorPortajLabel1.setText("Fechada");
-    }
     
     /**
      * @param args the command line arguments

@@ -79,30 +79,27 @@ public class ControleHome extends javax.swing.JFrame {
                     break;
             }
         }
-        
+
         DisableEnableControls();
     }
 
-    private void Digitar(String value)
-    {
+    private void Digitar(String value) {
         String valorAtual = lblVisor.getText();
-        
-        if (value.equals("."))
-        {
-            if (!valorAtual.contains("."))
+
+        if (value.equals(".")) {
+            if (!valorAtual.contains(".")) {
                 lblVisor.setText(valorAtual + ".");
-        }
-        else
-        {
-            if (valorAtual.equals("0"))
+            }
+        } else {
+            if (valorAtual.equals("0")) {
                 lblVisor.setText(value);
-            else
+            } else {
                 lblVisor.setText(valorAtual + value);
+            }
         }
     }
-    
-    private void RemoveSelectionOp()
-    {
+
+    private void RemoveSelectionOp() {
         String[] operacoes = new String[7];
         operacoes[0] = "on";
         operacoes[1] = "off";
@@ -111,17 +108,16 @@ public class ControleHome extends javax.swing.JFrame {
         operacoes[4] = "volume";
         operacoes[5] = "intensidade";
         operacoes[6] = "temperatura";
-        
-        for (int i = 0; i < operacoes.length; i++)
+
+        for (int i = 0; i < operacoes.length; i++) {
             alteraCorBotao(operacoes[i]);
+        }
     }
-    
-    private void DisableEnableControls()
-    {
-        if (controleSmart == null)
-        {
+
+    private void DisableEnableControls() {
+        if (controleSmart == null) {
             DisableEnableTeclado(false);
-            
+
             btnOn.setEnabled(false);
             btnOff.setEnabled(false);
             ventilador.setEnabled(false);
@@ -131,18 +127,17 @@ public class ControleHome extends javax.swing.JFrame {
             temperatura.setEnabled(false);
             bntDot.setEnabled(false);
             btnSend.setEnabled(false);
-        } 
-        else
-        {
+        } else {
             btnOn.setEnabled(true);
             btnOff.setEnabled(true);
             bntDot.setEnabled(false);
             btnSend.setEnabled(true);
-            if (tempVol != null && !tempVol.equals("off") && !tempVol.equals("on"))
+
+            if (tempVol != null && !tempVol.equals("off") && !tempVol.equals("on") && !tempVol.equals("ventilador")) {
                 DisableEnableTeclado(true);
-    
-            switch(controleSmart)
-            {
+            }
+
+            switch (controleSmart) {
                 case "luz":
                     ventilador.setEnabled(false);
                     canal.setEnabled(false);
@@ -152,13 +147,14 @@ public class ControleHome extends javax.swing.JFrame {
                     bntDot.setEnabled(false);
                     break;
                 case "arCondicionado":
-                    ventilador.setEnabled(false);
+                    ventilador.setEnabled(true);
                     canal.setEnabled(false);
                     volume.setEnabled(false);
                     intensidade.setEnabled(false);
                     temperatura.setEnabled(true);
-                    if (tempVol != null && !tempVol.equals("off") && !tempVol.equals("on"))
+                    if (tempVol != null && !tempVol.equals("off") && !tempVol.equals("on")) {
                         bntDot.setEnabled(true);
+                    }
                     break;
                 case "Tv":
                     ventilador.setEnabled(false);
@@ -173,24 +169,25 @@ public class ControleHome extends javax.swing.JFrame {
                     volume.setEnabled(false);
                     intensidade.setEnabled(false);
                     temperatura.setEnabled(false);
-                    if (tempVol != null && tempVol.equals("on"))
+                    if (tempVol != null && tempVol.equals("on")) {
                         DisableEnableTeclado(true);
+                    }
                     break;
                 case "aquecedor":
-                    ventilador.setEnabled(true);
+                    ventilador.setEnabled(false);
                     canal.setEnabled(false);
                     volume.setEnabled(false);
                     intensidade.setEnabled(false);
                     temperatura.setEnabled(true);
-                    if (tempVol != null && !tempVol.equals("off") && !tempVol.equals("on"))
+                    if (tempVol != null && !tempVol.equals("off") && !tempVol.equals("on")) {
                         bntDot.setEnabled(true);
+                    }
                     break;
             }
         }
     }
-        
-    private void DisableEnableTeclado(boolean enable)
-    {
+
+    private void DisableEnableTeclado(boolean enable) {
         btn0.setEnabled(enable);
         btn1.setEnabled(enable);
         btn2.setEnabled(enable);
@@ -203,7 +200,7 @@ public class ControleHome extends javax.swing.JFrame {
         btn9.setEnabled(enable);
         bntBack.setEnabled(enable);
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -588,9 +585,9 @@ public class ControleHome extends javax.swing.JFrame {
 
     private void luzActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_luzActionPerformed
 
-        if (controleSmart != null)
+        if (controleSmart != null) {
             alteraCorBotao(this.controleSmart);
-        else {
+        } else {
             this.controleSmart = "luz";
             this.luz.setBackground(Color.yellow);
             lblInfo.setText("");
@@ -601,9 +598,9 @@ public class ControleHome extends javax.swing.JFrame {
 
     private void arCondicionadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_arCondicionadoActionPerformed
 
-        if (controleSmart != null)
+        if (controleSmart != null) {
             alteraCorBotao(this.controleSmart);
-        else {
+        } else {
             this.controleSmart = "arCondicionado";
             this.arCondicionado.setBackground(Color.yellow);
             lblInfo.setText("");
@@ -614,9 +611,9 @@ public class ControleHome extends javax.swing.JFrame {
 
     private void portaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_portaActionPerformed
 
-        if (controleSmart != null)
+        if (controleSmart != null) {
             alteraCorBotao(this.controleSmart);
-        else {
+        } else {
             this.controleSmart = "porta";
             this.porta.setBackground(Color.yellow);
             lblInfo.setText("");
@@ -627,9 +624,9 @@ public class ControleHome extends javax.swing.JFrame {
 
     private void televisaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_televisaoActionPerformed
 
-        if (controleSmart != null)
+        if (controleSmart != null) {
             alteraCorBotao(this.controleSmart);
-        else {
+        } else {
             this.controleSmart = "Tv";
             this.televisao.setBackground(Color.yellow);
             lblInfo.setText("");
@@ -640,9 +637,9 @@ public class ControleHome extends javax.swing.JFrame {
 
     private void aquecedorAguaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aquecedorAguaActionPerformed
 
-        if (controleSmart != null)
+        if (controleSmart != null) {
             alteraCorBotao(this.controleSmart);
-        else {
+        } else {
             this.controleSmart = "aquecedor";
             this.aquecedorAgua.setBackground(Color.yellow);
             lblInfo.setText("");
@@ -652,9 +649,9 @@ public class ControleHome extends javax.swing.JFrame {
     }//GEN-LAST:event_aquecedorAguaActionPerformed
 
     private void btnOnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOnActionPerformed
-        if (tempVol != null)
+        if (tempVol != null) {
             alteraCorBotao(this.tempVol);
-        else {
+        } else {
             this.tempVol = "on";
             this.btnOn.setBackground(Color.yellow);
             DisableEnableControls();
@@ -671,18 +668,19 @@ public class ControleHome extends javax.swing.JFrame {
 
     private void bntBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntBackActionPerformed
         String valorAtual = lblVisor.getText();
-        
-        if (valorAtual.length() == 1)
+
+        if (valorAtual.length() == 1) {
             lblVisor.setText("0");
-        else
+        } else {
             lblVisor.setText(valorAtual.substring(0, valorAtual.length() - 1));
+        }
     }//GEN-LAST:event_bntBackActionPerformed
 
     private void volumeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volumeActionPerformed
-        
-        if (tempVol != null)
+
+        if (tempVol != null) {
             alteraCorBotao(this.tempVol);
-        else {
+        } else {
             this.tempVol = "volume";
             this.volume.setBackground(Color.yellow);
             DisableEnableControls();
@@ -691,9 +689,9 @@ public class ControleHome extends javax.swing.JFrame {
 
     private void temperaturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_temperaturaActionPerformed
 
-        if (tempVol != null)
+        if (tempVol != null) {
             alteraCorBotao(this.tempVol);
-        else {
+        } else {
             this.tempVol = "temperatura";
             this.temperatura.setBackground(Color.yellow);
             DisableEnableControls();
@@ -705,83 +703,72 @@ public class ControleHome extends javax.swing.JFrame {
         if (this.controleSmart != null) {
             switch (controleSmart) {
                 case "luz":
-                    if (this.tempVol == null)
+                    if (this.tempVol == null) {
                         lblInfo.setText("Selecione uma operação!");
-                    if (this.tempVol.equals("on") || this.tempVol.equals("off"))
-                    {
+                    }
+                    if (this.tempVol.equals("on") || this.tempVol.equals("off")) {
                         controller.SmartLight_TurnOffOn();
                         lblInfo.setText("Luzes (des)ligadas.");
-                    }
-                    else if (this.tempVol.equals("intensidade"))
-                    {
+                    } else if (this.tempVol.equals("intensidade")) {
                         int intensity = Integer.parseInt(lblVisor.getText());
                         controller.SmartLight_ChangeIntensity(intensity);
                         lblInfo.setText("Intesidade alterada para " + lblVisor.getText() + ".");
                     }
                     break;
                 case "Tv":
-                    if (tempVol == null)
+                    if (tempVol == null) {
                         lblInfo.setText("Selecione uma operação!");
-                    else if (tempVol.equals("canal"))
-                    {
+                    } else if (tempVol.equals("canal")) {
                         int channel = Integer.parseInt(lblVisor.getText());
                         controller.SmartTV_Channel(channel);
-                    }
-                    else if (tempVol.equals("volume"))
-                    {
+                    } else if (tempVol.equals("volume")) {
                         int volume = Integer.parseInt(lblVisor.getText());
                         controller.SmartTV_Volume(volume);
-                    }
-                    else if (tempVol.equals("on") || tempVol.equals("off"))
+                    } else if (tempVol.equals("on") || tempVol.equals("off")) {
                         controller.SmartTV_TurnOnOff();
+                    }
                     break;
                 case "arCondicionado":
                     if (tempVol == null) {
                         lblInfo.setText("Selecione uma operação!");
                     } else if (tempVol.equals("ventilador")) {
                         controller.SmartAr_TurnOnOffWind();
-                    }
-                    else if (tempVol.equals("temperatura")) {
+                    } else if (tempVol.equals("temperatura")) {
                         float temp = Float.parseFloat(lblVisor.getText());
                         controller.SmartAr_ChangeTempeture(temp);
-                    }
-                    else if (tempVol.equals("on") || tempVol.equals("off"))
+                    } else if (tempVol.equals("on") || tempVol.equals("off")) {
                         controller.SmartAr_TurnOnOff();
+                    }
                     break;
                 case "aquecedor":
-                    if (this.tempVol == null)
+                    if (this.tempVol == null) {
                         lblInfo.setText("Selecione uma operação!");
-                    else if (tempVol.equals("on") || tempVol.equals("off"))
-                    {
+                    } else if (tempVol.equals("on") || tempVol.equals("off")) {
                         controller.SmartAquecedor_TurnOffOn();
                         lblInfo.setText("Aquecedor (des)ligado.");
-                    }
-                    else if (this.tempVol.equals("temperatura"))
-                    {
+                    } else if (this.tempVol.equals("temperatura")) {
                         float temp = Float.parseFloat(lblVisor.getText());
                         controller.SmartAquecedor_ChangeTemperature(temp);
                         lblInfo.setText("Temperatura alterada para " + lblVisor.getText() + ".");
-                    }   
+                    }
                     break;
                 case "porta":
-                    if (this.tempVol == null)
-                       lblInfo.setText("Selecione uma operação!");
-                    else if (this.tempVol.equals("on"))
-                    {
+                    if (this.tempVol == null) {
+                        lblInfo.setText("Selecione uma operação!");
+                    } else if (this.tempVol.equals("on")) {
                         boolean result = controller.SmartDoor_Open(lblVisor.getText());
-                        if (!result)
+                        if (!result) {
                             lblInfo.setText("Senha incorreta.");
-                        else
+                        } else {
                             lblInfo.setText("Porta aberta.");
-                    }
-                    else if (this.tempVol.equals("off"))
-                    {
+                        }
+                    } else if (this.tempVol.equals("off")) {
                         controller.SmartDoor_Close();
                         lblInfo.setText("Porta fechada.");
                     }
                     break;
             }
-            
+
             lblVisor.setText("0");
             alteraCorBotao(this.tempVol);
             alteraCorBotao(this.controleSmart);
@@ -794,9 +781,9 @@ public class ControleHome extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSendActionPerformed
 
     private void btnOffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOffActionPerformed
-        if (tempVol != null)
+        if (tempVol != null) {
             alteraCorBotao(this.tempVol);
-        else {
+        } else {
             this.tempVol = "off";
             this.btnOff.setBackground(Color.yellow);
             DisableEnableControls();
@@ -840,9 +827,9 @@ public class ControleHome extends javax.swing.JFrame {
     }//GEN-LAST:event_btn9ActionPerformed
 
     private void intensidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_intensidadeActionPerformed
-        if (tempVol != null)
+        if (tempVol != null) {
             alteraCorBotao(this.tempVol);
-        else {
+        } else {
             this.tempVol = "intensidade";
             this.intensidade.setBackground(Color.yellow);
             DisableEnableControls();
@@ -850,9 +837,9 @@ public class ControleHome extends javax.swing.JFrame {
     }//GEN-LAST:event_intensidadeActionPerformed
 
     private void ventiladorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ventiladorActionPerformed
-        if (tempVol != null)
+        if (tempVol != null) {
             alteraCorBotao(this.tempVol);
-        else {
+        } else {
             this.tempVol = "ventilador";
             this.ventilador.setBackground(Color.yellow);
             DisableEnableControls();
@@ -860,9 +847,9 @@ public class ControleHome extends javax.swing.JFrame {
     }//GEN-LAST:event_ventiladorActionPerformed
 
     private void canalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_canalActionPerformed
-        if (tempVol != null)
+        if (tempVol != null) {
             alteraCorBotao(this.tempVol);
-        else {
+        } else {
             this.tempVol = "canal";
             this.canal.setBackground(Color.yellow);
             DisableEnableControls();
@@ -903,8 +890,7 @@ public class ControleHome extends javax.swing.JFrame {
             }
         });
     }
-    
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton aquecedorAgua;

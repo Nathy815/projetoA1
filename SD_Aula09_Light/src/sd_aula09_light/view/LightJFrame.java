@@ -20,12 +20,15 @@ public class LightJFrame extends javax.swing.JFrame {
 
     private Light li = new Light();
     private Light_Controller liController = new Light_Controller(li);
+    private static LightJFrame view;
 
     /**
      * Creates new form SmartTVJFrame
      */
     public LightJFrame() {
         try {
+            view = this;
+            
             // Exportando o objeto para o stub
             ILight stub = (ILight) UnicastRemoteObject.exportObject(liController, 0);
             // Binding o objeto remoto (stub) no registro
@@ -33,19 +36,50 @@ public class LightJFrame extends javax.swing.JFrame {
             registry.rebind("Light", stub);
 
             System.err.println("Servidor Pronto");
+            
+            initComponents();
+            IntensidadejLabel.setVisible(false);
+            IntensidadejButton.setVisible(false);
+            ValorIntensidadejLabel.setVisible(false);
+            IntensidadejTextField1.setVisible(false);
+        
         } catch (Exception e) {
             System.err.println("Exceção do Servidor: " + e.toString());
             e.printStackTrace();
         }
-        
-        initComponents();
-        IntensidadejLabel.setVisible(false);
-        IntensidadejButton.setVisible(false);
-        ValorIntensidadejLabel.setVisible(false);
-        IntensidadejTextField1.setVisible(false);
-
     }
 
+    public static LightJFrame getInstance() {
+        return view;
+    }
+    
+    public void PowerVisibility()
+    {
+        if (!li.isPowerButton()) {
+            ValorLigaDesligajLabel1.setText("Desligado");
+            PowerjButton.setText("Liga");
+
+            IntensidadejLabel.setVisible(false);
+            IntensidadejButton.setVisible(false);
+            ValorIntensidadejLabel.setVisible(false);
+            IntensidadejTextField1.setVisible(false);
+
+        } else {
+            ValorLigaDesligajLabel1.setText("Ligado");
+            PowerjButton.setText("Desliga");
+
+            IntensidadejLabel.setVisible(true);
+            IntensidadejButton.setVisible(true);
+            ValorIntensidadejLabel.setVisible(true);
+            IntensidadejTextField1.setVisible(true);
+        }
+    }
+    
+    public void IntensityVisibility()
+    {
+        ValorIntensidadejLabel.setText(String.valueOf(li.getIntensity()));
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -179,31 +213,14 @@ public class LightJFrame extends javax.swing.JFrame {
     private void PowerjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PowerjButtonActionPerformed
         liController.turnOffOn();
 
-        if (!li.isPowerButton()) {
-            ValorLigaDesligajLabel1.setText("Desligado");
-            PowerjButton.setText("Liga");
-
-            IntensidadejLabel.setVisible(false);
-            IntensidadejButton.setVisible(false);
-            ValorIntensidadejLabel.setVisible(false);
-            IntensidadejTextField1.setVisible(false);
-
-        } else {
-            ValorLigaDesligajLabel1.setText("Ligado");
-            PowerjButton.setText("Desliga");
-
-            IntensidadejLabel.setVisible(true);
-            IntensidadejButton.setVisible(true);
-            ValorIntensidadejLabel.setVisible(true);
-            IntensidadejTextField1.setVisible(true);
-        }
-
+        PowerVisibility();
     }//GEN-LAST:event_PowerjButtonActionPerformed
 
     private void IntensidadejButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IntensidadejButtonActionPerformed
 
         liController.changeIntensity(Integer.parseInt(IntensidadejTextField1.getText()));
-        ValorIntensidadejLabel.setText(String.valueOf(li.getIntensity()));
+        
+        IntensityVisibility();
 
     }//GEN-LAST:event_IntensidadejButtonActionPerformed
 

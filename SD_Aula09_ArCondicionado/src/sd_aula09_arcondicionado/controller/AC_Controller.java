@@ -6,6 +6,7 @@
 package sd_aula09_arcondicionado.controller;
 
 import sd_aula09_arcondicionado.model.ArCondicionado;
+import sd_aula09_arcondicionado.view.ArCondicionadoJFrame;
 
 /**
  *
@@ -29,6 +30,7 @@ public class AC_Controller implements IAC {
             ac.setPowerButton(true);
             System.out.println("Ar - TurnOn");
         }
+        ArCondicionadoJFrame.getInstance().OnOffVisibility();
     }
 
     public void turnWindOffOn() {
@@ -39,10 +41,12 @@ public class AC_Controller implements IAC {
             ac.setWind(true);
             System.out.println("Ar - TurnOnWind");
         }
+        ArCondicionadoJFrame.getInstance().WindVisibility();
     }
     
     public void changeTemperature(float temp){
         ac.setTemperature(temp);
         System.out.println("Ar - Tempeture");
+        ArCondicionadoJFrame.getInstance().TemperatureVisibility();
     }
 }

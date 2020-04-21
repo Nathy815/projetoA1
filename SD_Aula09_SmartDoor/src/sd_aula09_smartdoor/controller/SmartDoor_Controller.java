@@ -26,6 +26,7 @@ public class SmartDoor_Controller implements ISmartDoor {
         System.out.println("SmartDoor - checkPassword");
         if (pwd.equals(sd.getPassword())){
             sd.setOpened(true);
+            SmartDoorJFrame.getInstance().OpenVisibility();
             return true;
         }
         return false;
@@ -34,6 +35,7 @@ public class SmartDoor_Controller implements ISmartDoor {
     public void closeDoor(){
         System.out.println("SmartDoor - closeDoor");
         this.sd.setOpened(false);
+        SmartDoorJFrame.getInstance().CloseVisibility();
     }
     
 }
