@@ -129,12 +129,17 @@ public class ControleHome extends javax.swing.JFrame {
             btnSend.setEnabled(false);
         } else {
             btnOn.setEnabled(true);
-            btnOff.setEnabled(true);
+            btnOff.setEnabled(false);
             bntDot.setEnabled(false);
-            btnSend.setEnabled(true);
-
-            if (tempVol != null && !tempVol.equals("off") && !tempVol.equals("on") && !tempVol.equals("ventilador")) {
-                DisableEnableTeclado(true);
+            
+            if (tempVol != null) {
+                btnSend.setEnabled(true);    
+                if (!tempVol.equals("off") && !tempVol.equals("on") && !tempVol.equals("ventilador"))
+                    DisableEnableTeclado(true);
+            }
+            else {
+                btnSend.setEnabled(false);
+                DisableEnableTeclado(false);
             }
 
             switch (controleSmart) {
@@ -152,7 +157,7 @@ public class ControleHome extends javax.swing.JFrame {
                     volume.setEnabled(false);
                     intensidade.setEnabled(false);
                     temperatura.setEnabled(true);
-                    if (tempVol != null && !tempVol.equals("off") && !tempVol.equals("on")) {
+                    if (tempVol != null && !tempVol.equals("off") && !tempVol.equals("on") && !tempVol.equals("ventilador")) {
                         bntDot.setEnabled(true);
                     }
                     break;
@@ -169,6 +174,7 @@ public class ControleHome extends javax.swing.JFrame {
                     volume.setEnabled(false);
                     intensidade.setEnabled(false);
                     temperatura.setEnabled(false);
+                    btnOff.setEnabled(true);
                     if (tempVol != null && tempVol.equals("on")) {
                         DisableEnableTeclado(true);
                     }

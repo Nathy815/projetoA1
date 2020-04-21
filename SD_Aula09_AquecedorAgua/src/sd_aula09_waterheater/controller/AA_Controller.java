@@ -24,10 +24,8 @@ public class AA_Controller implements IAA {
 
     public void turnOffOn() {
         if (aa.isPowerButton()) {
-            System.out.println("Aquecedor - TurnOff");
             aa.setPowerButton(false);
         } else {
-            System.out.println("Aquecedor - TurnOn");
             aa.setPowerButton(true);
         }
         AquecedorAguaJFrame.getIntance().PowerVisibility();
@@ -36,7 +34,6 @@ public class AA_Controller implements IAA {
     
     public void changeTemperature(float temp){
         aa.setTemperature(temp);
-        System.out.println("Aquecedor - Tempeture");
         AquecedorAguaJFrame.getIntance().TemperaturaVisibility();
     } 
 }
