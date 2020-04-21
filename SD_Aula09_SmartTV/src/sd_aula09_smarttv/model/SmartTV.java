@@ -5,6 +5,9 @@
  */
 package sd_aula09_smarttv.model;
 
+import java.awt.event.ActionListener;
+import java.util.Observable;
+
 /**
  *
  * @author biizuka
@@ -44,7 +47,5 @@ public class SmartTV {
     public void setPowerButton(boolean powerButton) {
         this.powerButton = powerButton;
     }
-    
-    
     
 }

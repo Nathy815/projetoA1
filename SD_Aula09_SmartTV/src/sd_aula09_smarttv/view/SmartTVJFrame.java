@@ -20,13 +20,16 @@ public class SmartTVJFrame extends javax.swing.JFrame {
 
     private SmartTV stv = new SmartTV();
     private final SmartTV_Controller stvController = new SmartTV_Controller(stv);
-
+    private static SmartTVJFrame view;
     /**
      * Creates new form SmartTVJFrame
      */
     public SmartTVJFrame() {
         
-        try {
+        try 
+        {
+            view = this;
+            
             // Exportando o objeto para o stub
             ISmartTV stub = (ISmartTV) UnicastRemoteObject.exportObject(stvController, 0);
             // Binding o objeto remoto (stub) no registro
@@ -34,23 +37,71 @@ public class SmartTVJFrame extends javax.swing.JFrame {
             registry.rebind("SmartTV", stub);
 
             System.err.println("Servidor Pronto");
-        } catch (Exception e) {
+        
+            initComponents();
+            CanaljLabel.setVisible(false);
+            CanaljButton.setVisible(false);
+            ValorCanaljLabel.setVisible(false);
+            CanaljTextField1.setVisible(false);
+
+            VolumejButton1.setVisible(false);
+            VolumejLabel.setVisible(false);
+            ValorVolumejLabel1.setVisible(false);
+            VolumejTextField.setVisible(false);
+        } 
+        catch (Exception e) {
             System.err.println("Exceção do Servidor: " + e.toString());
             e.printStackTrace();
         }
-        
-        initComponents();
-        CanaljLabel.setVisible(false);
-        CanaljButton.setVisible(false);
-        ValorCanaljLabel.setVisible(false);
-        CanaljTextField1.setVisible(false);
+    }
+    
+    public static SmartTVJFrame getIntance()
+    {
+        return view;
+    }
+    
+    public void PowerVisibility()
+    {
+        if (!stv.isPowerButton()) {
+            ValorLigaDesligajLabel1.setText("Desligado");
+            PowerjButton.setText("Liga");
 
-        VolumejButton1.setVisible(false);
-        VolumejLabel.setVisible(false);
-        ValorVolumejLabel1.setVisible(false);
-        VolumejTextField.setVisible(false);
+            CanaljLabel.setVisible(false);
+            CanaljButton.setVisible(false);
+            ValorCanaljLabel.setVisible(false);
+            CanaljTextField1.setVisible(false);
+
+            VolumejButton1.setVisible(false);
+            VolumejLabel.setVisible(false);
+            ValorVolumejLabel1.setVisible(false);
+            VolumejTextField.setVisible(false);
+
+        } else {
+            ValorLigaDesligajLabel1.setText("Ligado");
+            PowerjButton.setText("Desliga");
+
+            CanaljLabel.setVisible(true);
+            CanaljButton.setVisible(true);
+            ValorCanaljLabel.setVisible(true);
+            CanaljTextField1.setVisible(true);
+
+            VolumejButton1.setVisible(true);
+            VolumejLabel.setVisible(true);
+            ValorVolumejLabel1.setVisible(true);
+            VolumejTextField.setVisible(true);
+        }
     }
 
+    public void VolumeVisibility()
+    {
+        ValorVolumejLabel1.setText(String.valueOf(stv.getVolume()));
+    }
+    
+    public void ChannelVisibility()
+    {
+        ValorCanaljLabel.setText(String.valueOf(stv.getChannel()));
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -219,49 +270,18 @@ public class SmartTVJFrame extends javax.swing.JFrame {
 
     private void PowerjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PowerjButtonActionPerformed
         stvController.turnOffOn();
-
-        if (!stv.isPowerButton()) {
-            ValorLigaDesligajLabel1.setText("Desligado");
-            PowerjButton.setText("Liga");
-
-            CanaljLabel.setVisible(false);
-            CanaljButton.setVisible(false);
-            ValorCanaljLabel.setVisible(false);
-            CanaljTextField1.setVisible(false);
-
-            VolumejButton1.setVisible(false);
-            VolumejLabel.setVisible(false);
-            ValorVolumejLabel1.setVisible(false);
-            VolumejTextField.setVisible(false);
-
-        } else {
-            ValorLigaDesligajLabel1.setText("Ligado");
-            PowerjButton.setText("Desliga");
-
-            CanaljLabel.setVisible(true);
-            CanaljButton.setVisible(true);
-            ValorCanaljLabel.setVisible(true);
-            CanaljTextField1.setVisible(true);
-
-            VolumejButton1.setVisible(true);
-            VolumejLabel.setVisible(true);
-            ValorVolumejLabel1.setVisible(true);
-            VolumejTextField.setVisible(true);
-        }
-
+        PowerVisibility();
     }//GEN-LAST:event_PowerjButtonActionPerformed
 
     private void VolumejButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolumejButton1ActionPerformed
         this.stvController.changeVolume(Integer.parseInt(this.VolumejTextField.getText()));
-        ValorVolumejLabel1.setText(String.valueOf(stv.getVolume()));
-
+        VolumeVisibility();
     }//GEN-LAST:event_VolumejButton1ActionPerformed
 
     private void CanaljButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CanaljButtonActionPerformed
         int channel = Integer.parseInt(this.CanaljTextField1.getText());
         this.stvController.changeChannel(channel);
-        ValorCanaljLabel.setText(String.valueOf(stv.getChannel()));
-
+        ChannelVisibility();
     }//GEN-LAST:event_CanaljButtonActionPerformed
 
     /**

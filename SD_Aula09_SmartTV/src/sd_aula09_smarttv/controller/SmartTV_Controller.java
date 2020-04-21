@@ -5,7 +5,9 @@
  */
 package sd_aula09_smarttv.controller;
 
+import java.io.IOException;
 import sd_aula09_smarttv.model.SmartTV;
+import sd_aula09_smarttv.view.SmartTVJFrame;
 
 /**
  *
@@ -22,20 +24,19 @@ public class SmartTV_Controller implements ISmartTV {
     public void turnOffOn() {
         if (stv.isPowerButton()) {
             stv.setPowerButton(false);
-            System.out.println("TV - Turnoff");
         } else {
             stv.setPowerButton(true);
-            System.out.println("TV - TurnOn");
-        }
+        }    
+        SmartTVJFrame.getIntance().PowerVisibility();
     }
 
     public void changeChannel(int channel) {
         stv.setChannel(channel);
-        System.out.println("TV - Channel");
+        SmartTVJFrame.getIntance().ChannelVisibility();
     }
     
     public void changeVolume(int volume){
         stv.setVolume(volume);
-        System.out.println("TV - Volume");
+        SmartTVJFrame.getIntance().VolumeVisibility();
     }
 }
