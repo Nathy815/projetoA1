@@ -130,20 +130,16 @@ public class ControleHome extends javax.swing.JFrame {
             intensidade.setEnabled(false);
             temperatura.setEnabled(false);
             bntDot.setEnabled(false);
+            btnSend.setEnabled(false);
         } 
         else
         {
             btnOn.setEnabled(true);
             btnOff.setEnabled(true);
             bntDot.setEnabled(false);
-            if (tempVol != null && !tempVol.equals("off") && !tempVol.equals("on"))
+            btnSend.setEnabled(true);
+            if (tempVol != null && !tempVol.equals("off") && !tempVol.equals("on") && !tempVol.equals("ventilador"))
                 DisableEnableTeclado(true);
-            else
-            {
-                DisableEnableTeclado(false);
-                if (tempVol != null)
-                    btnSend.setEnabled(true);
-            }
                     
             switch(controleSmart)
             {
@@ -156,7 +152,7 @@ public class ControleHome extends javax.swing.JFrame {
                     bntDot.setEnabled(false);
                     break;
                 case "arCondicionado":
-                    ventilador.setEnabled(false);
+                    ventilador.setEnabled(true);
                     canal.setEnabled(false);
                     volume.setEnabled(false);
                     intensidade.setEnabled(false);
@@ -181,7 +177,7 @@ public class ControleHome extends javax.swing.JFrame {
                         DisableEnableTeclado(true);
                     break;
                 case "aquecedor":
-                    ventilador.setEnabled(true);
+                    ventilador.setEnabled(false);
                     canal.setEnabled(false);
                     volume.setEnabled(false);
                     intensidade.setEnabled(false);
@@ -683,7 +679,7 @@ public class ControleHome extends javax.swing.JFrame {
     }//GEN-LAST:event_bntBackActionPerformed
 
     private void volumeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volumeActionPerformed
-
+        
         if (tempVol != null)
             alteraCorBotao(this.tempVol);
         else {

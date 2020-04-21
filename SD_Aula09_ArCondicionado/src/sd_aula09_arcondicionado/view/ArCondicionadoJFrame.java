@@ -20,12 +20,14 @@ public class ArCondicionadoJFrame extends javax.swing.JFrame {
 
     private ArCondicionado ac = new ArCondicionado();
     private AC_Controller acController = new AC_Controller(ac);
+    private static ArCondicionadoJFrame view;
 
     /**
      * Creates new form ArCondicionadoJFrame
      */
     public ArCondicionadoJFrame() {
         try {
+            view = this;
             // Exportando o objeto para o stub
             IAC stub = (IAC) UnicastRemoteObject.exportObject(acController, 0);
             // Binding o objeto remoto (stub) no registro
@@ -33,22 +35,72 @@ public class ArCondicionadoJFrame extends javax.swing.JFrame {
             registry.rebind("AC", stub);
 
             System.err.println("Servidor Pronto");
+            
+            initComponents();
+            TemperaturaAtualjLabel.setVisible(false);
+            TempjButton.setVisible(false);
+            ValorTempAtualjLabel1.setVisible(false);
+            jTextField1.setVisible(false);
+
+            WindjButton1.setVisible(false);
+            WindjLabel.setVisible(false);
+            ValorVentojLabel1.setVisible(false);
+        
         } catch (Exception e) {
             System.err.println("Exceção do Servidor: " + e.toString());
             e.printStackTrace();
         }
-        
-        initComponents();
-        TemperaturaAtualjLabel.setVisible(false);
-        TempjButton.setVisible(false);
-        ValorTempAtualjLabel1.setVisible(false);
-        jTextField1.setVisible(false);
+    }
+    
+    public static ArCondicionadoJFrame getInstance() {
+        return view;
+    }
+    
+    public void OnOffVisibility() {
+        if (!ac.isPowerButton()) {
+            ValorLigaDesligajLabel1.setText("Desligado");
+            PowerjButton.setText("Liga");
 
-        WindjButton1.setVisible(false);
-        WindjLabel.setVisible(false);
-        ValorVentojLabel1.setVisible(false);
+            TemperaturaAtualjLabel.setVisible(false);
+            TempjButton.setVisible(false);
+            ValorTempAtualjLabel1.setVisible(false);
+            jTextField1.setVisible(false);
+
+            WindjButton1.setVisible(false);
+            WindjLabel.setVisible(false);
+            ValorVentojLabel1.setVisible(false);
+
+        } else {
+            ValorLigaDesligajLabel1.setText("Ligado");
+            PowerjButton.setText("Desliga");
+
+            TemperaturaAtualjLabel.setVisible(true);
+            TempjButton.setVisible(true);
+            ValorTempAtualjLabel1.setVisible(true);
+            jTextField1.setVisible(true);
+
+            WindjButton1.setVisible(true);
+            WindjLabel.setVisible(true);
+            ValorVentojLabel1.setVisible(true);
+        }
+    }
+    
+    public void WindVisibility()
+    {
+        if (!ac.isWind()) {
+            ValorVentojLabel1.setText("Desligado");
+            WindjButton1.setText("Liga");
+        } else {
+            ValorVentojLabel1.setText("Ligado");
+            WindjButton1.setText("Desliga");
+        }
     }
 
+    public void TemperatureVisibility()
+    {
+        ValorTempAtualjLabel1.setText(String.valueOf(ac.getTemperature()));
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -213,51 +265,20 @@ public class ArCondicionadoJFrame extends javax.swing.JFrame {
     private void PowerjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PowerjButtonActionPerformed
         acController.turnOffOn();
 
-        if (!ac.isPowerButton()) {
-            ValorLigaDesligajLabel1.setText("Desligado");
-            PowerjButton.setText("Liga");
-
-            TemperaturaAtualjLabel.setVisible(false);
-            TempjButton.setVisible(false);
-            ValorTempAtualjLabel1.setVisible(false);
-            jTextField1.setVisible(false);
-
-            WindjButton1.setVisible(false);
-            WindjLabel.setVisible(false);
-            ValorVentojLabel1.setVisible(false);
-
-        } else {
-            ValorLigaDesligajLabel1.setText("Ligado");
-            PowerjButton.setText("Desliga");
-
-            TemperaturaAtualjLabel.setVisible(true);
-            TempjButton.setVisible(true);
-            ValorTempAtualjLabel1.setVisible(true);
-            jTextField1.setVisible(true);
-
-            WindjButton1.setVisible(true);
-            WindjLabel.setVisible(true);
-            ValorVentojLabel1.setVisible(true);
-        }
-
+        OnOffVisibility();
     }//GEN-LAST:event_PowerjButtonActionPerformed
 
     private void WindjButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_WindjButton1ActionPerformed
         acController.turnWindOffOn();
 
-        if (!ac.isWind()) {
-            ValorVentojLabel1.setText("Desligado");
-            WindjButton1.setText("Liga");
-        } else {
-            ValorVentojLabel1.setText("Ligado");
-            WindjButton1.setText("Desliga");
-        }
+        WindVisibility();
     }//GEN-LAST:event_WindjButton1ActionPerformed
 
     private void TempjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TempjButtonActionPerformed
 
         acController.changeTemperature(Float.valueOf(jTextField1.getText()));
-        ValorTempAtualjLabel1.setText(String.valueOf(ac.getTemperature()));
+        
+        TemperatureVisibility();
 
     }//GEN-LAST:event_TempjButtonActionPerformed
 

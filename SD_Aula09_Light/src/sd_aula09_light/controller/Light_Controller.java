@@ -6,6 +6,7 @@
 package sd_aula09_light.controller;
 
 import sd_aula09_light.model.Light;
+import sd_aula09_light.view.LightJFrame;
 
 /**
  *
@@ -29,11 +30,13 @@ public class Light_Controller implements ILight {
             lig.setPowerButton(true);
             System.out.println("Light - turnOn");
         }
+        LightJFrame.getInstance().PowerVisibility();
     }
 
     public void changeIntensity(int intensity) {
         lig.setIntensity(intensity);
         System.out.println("Light - intensidade");
+        LightJFrame.getInstance().IntensityVisibility();
     }
     
 }
