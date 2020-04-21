@@ -20,12 +20,15 @@ public class AquecedorAguaJFrame extends javax.swing.JFrame {
 
     private AquecedorAgua aa = new AquecedorAgua();
     private AA_Controller aaController = new AA_Controller(aa);
+    private static AquecedorAguaJFrame view;
 
     /**
      * Creates new form ArCondicionadoJFrame
      */
     public AquecedorAguaJFrame() {
         try {
+
+            view = this;
             // Exportando o objeto para o stub
             IAA stub = (IAA) UnicastRemoteObject.exportObject(aaController, 0);
             // Binding o objeto remoto (stub) no registro
@@ -37,13 +40,42 @@ public class AquecedorAguaJFrame extends javax.swing.JFrame {
             System.err.println("Exceção do Servidor: " + e.toString());
             e.printStackTrace();
         }
-        
+
         initComponents();
         TemperaturaAtualjLabel.setVisible(false);
         TempjButton.setVisible(false);
         ValorTempAtualjLabel1.setVisible(false);
         jTextField1.setVisible(false);
 
+    }
+
+    public static AquecedorAguaJFrame getIntance() {
+        return view;
+    }
+
+    public void TemperaturaVisibility() {
+        ValorTempAtualjLabel1.setText(String.valueOf(aa.getTemperature()));
+    }
+
+    public void PowerVisibility() {
+        if (!aa.isPowerButton()) {
+            ValorLigaDesligajLabel1.setText("Desligado");
+            PowerjButton.setText("Liga");
+
+            TemperaturaAtualjLabel.setVisible(false);
+            TempjButton.setVisible(false);
+            ValorTempAtualjLabel1.setVisible(false);
+            jTextField1.setVisible(false);
+
+        } else {
+            ValorLigaDesligajLabel1.setText("Ligado");
+            PowerjButton.setText("Desliga");
+
+            TemperaturaAtualjLabel.setVisible(true);
+            TempjButton.setVisible(true);
+            ValorTempAtualjLabel1.setVisible(true);
+            jTextField1.setVisible(true);
+        }
     }
 
     /**
@@ -201,9 +233,7 @@ public class AquecedorAguaJFrame extends javax.swing.JFrame {
 
     private void TempjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TempjButtonActionPerformed
 
-        aaController.changeTemperature(Float.valueOf(jTextField1.getText()));
         ValorTempAtualjLabel1.setText(String.valueOf(aa.getTemperature()));
-
     }//GEN-LAST:event_TempjButtonActionPerformed
 
     /**

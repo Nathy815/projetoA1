@@ -130,21 +130,17 @@ public class ControleHome extends javax.swing.JFrame {
             intensidade.setEnabled(false);
             temperatura.setEnabled(false);
             bntDot.setEnabled(false);
+            btnSend.setEnabled(false);
         } 
         else
         {
             btnOn.setEnabled(true);
             btnOff.setEnabled(true);
             bntDot.setEnabled(false);
+            btnSend.setEnabled(true);
             if (tempVol != null && !tempVol.equals("off") && !tempVol.equals("on"))
                 DisableEnableTeclado(true);
-            else
-            {
-                DisableEnableTeclado(false);
-                if (tempVol != null)
-                    btnSend.setEnabled(true);
-            }
-                    
+    
             switch(controleSmart)
             {
                 case "luz":
@@ -683,7 +679,7 @@ public class ControleHome extends javax.swing.JFrame {
     }//GEN-LAST:event_bntBackActionPerformed
 
     private void volumeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volumeActionPerformed
-
+        
         if (tempVol != null)
             alteraCorBotao(this.tempVol);
         else {
